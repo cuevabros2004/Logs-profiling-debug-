@@ -19,32 +19,10 @@ class ContenedorDb{
             return 'Id del objeto guardado: ' + objeto
         }
         catch(error){
-            error => { throw error}
+           return error
         } 
 
       }
-
-      
-
-    async getById(id){
-       
-        try {
-
-            const productSearched = await this.cliente(this.tabla).select().where("id", "=", id)
-
-            if(productSearched[0]===undefined ){
-                return null
-            }else{
-                return productSearched[0];
-            }
-            
-        }
-
-        catch(error){
-            error => { throw error}
-        } 
-
-     }
 
     
      async getAll(){
@@ -60,7 +38,7 @@ class ContenedorDb{
             }
 
         catch(error){
-            error => { throw error}
+            return error
         } 
 
     }
@@ -83,56 +61,7 @@ class ContenedorDb{
           return productosTestArray
 
         }
-
-        
-    
-
-
-    async deleteById(id){
-        try {
-            if(this.getById(id)){ 
-              const objetoBuscado = await this.cliente(this.tabla).del().where("id", "=", id)
-              return objetoBuscado
-            } else {
-              return 'No existe el producto con el id: ' + id
-            }
-          }
-          catch(error){
-              error => { throw error}
-          } 
-    }
-
-    async deleteAll(){
-
-            try {
-                const prodBuscado = await this.cliente(this.tabla).del()
-                return prodBuscado
-            }
-            catch(error){
-                error => { throw error}
-            } 
-
-    }
-
-    async update(objeto){
-        try {
-            if (this.getById(objeto.id)!==undefined){
-                await this.cliente(this.tabla).update(objeto).where('id', '=', objeto.id)
-                return objeto;
-            }else{
-                return 'No existe el producto con el id: ' + objeto.id
-            }
-        }
-        catch(error){
-            error => { throw error}
-        } 
-    }
-
-
-
-    
       
-
   }
 
 

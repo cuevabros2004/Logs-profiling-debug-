@@ -22,16 +22,16 @@ class Contenedor{
         } 
         catch (error){
             this.#productos = [];
-            error => { throw error}
+           return error
         } 
 
         try {
             this.#productos.push(objeto)
             await promises.writeFile(this.#filename, JSON.stringify(this.#productos, null, 2))
-            return 'Id del objeto guardado: ' + this.#productos[this.#productos.length - 1].id
+            return   this.#productos[this.#productos.length - 1].id
         }
         catch(error){
-            error => { throw error}
+           return error
         } 
 
       }
@@ -54,7 +54,7 @@ class Contenedor{
         }
 
         catch(error){
-            error => { throw error}
+            return error
         } 
 
      }
@@ -74,44 +74,9 @@ class Contenedor{
             }
 
         catch(error){
-            error => { throw error}
+            return error
         } 
 
-    }
-
-
-    async deleteById(id){
-        try {
-            this.#productos = await this.getAll()
-            await promises.writeFile(this.#filename, JSON.stringify(this.#productos.filter(p => p.id !== id), null, 2))
-            return this.#productos.filter(p => p.id == id)
-        }
-        catch(error){
-            error => { throw error}
-        } 
-    }
-
-    async deleteAll(){
-
-        this.#productos = []
-
-            try {
-                await promises.writeFile(this.#filename, JSON.stringify(this.#productos), null, 2)
-            }
-            catch(error){
-                error => { throw error}
-            } 
-
-    }
-
-    async update(objeto){
-        try {
-            await promises.writeFile(this.#filename, JSON.stringify(objeto, null, 2))
-            return objeto;
-        }
-        catch(error){
-            error => { throw error}
-        } 
     }
 
 
@@ -123,7 +88,7 @@ class Contenedor{
          } 
          catch (error){
              this.#chat = [];
-             error => { throw error}
+             return error
          } 
  
          try {
@@ -132,7 +97,7 @@ class Contenedor{
              return 'Id del objeto guardado: ' + this.#chat[this.#chat.length - 1].id
          }
          catch(error){
-             error => { throw error}
+             return error
          } 
     }
 
@@ -150,7 +115,7 @@ class Contenedor{
             }
 
         catch(error){
-            error => { throw error}
+            return error
         } 
     }
 

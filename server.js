@@ -12,7 +12,7 @@ import { STRING_CONEXION_MONGO, USUARIO_CONEXION_MONGO, PASSWORD_CONEXION_MONGO,
 import { routerApiRandom } from './routers/routerApiRandom.js'
 import  webSocket  from './webSocket.js'
 import {PUERTO_POR_DEFECTO} from './config.js'
-
+import loggerRutaNoDisponible from './pinoRutaNoDisponible.js'
 const servidor = express()
 const httpServer = new HttpServer(servidor)
 const io = new IOServer(httpServer)
@@ -84,6 +84,7 @@ function conectar() {
 
 webSocket(io)
 
+loggerRutaNoDisponible(servidor)
 
  export { conectar }
 

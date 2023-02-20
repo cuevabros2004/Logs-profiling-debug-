@@ -20,11 +20,13 @@ form.addEventListener('submit', (e) => {
   const title = document.getElementById('title').value
   const price = document.getElementById('price').value
   const thumbnail = document.getElementById('thumbnail').value
+  const text = document.getElementById('text').value
 
   const mensajes = {
     title: title,
     price: price,
-    thumbnail: thumbnail
+    thumbnail: thumbnail,
+    text:text
   }
 
   socket.emit('mensajes', mensajes);
@@ -60,7 +62,7 @@ socket.on('mensajesChatActualizados', normalizedMensajesChat => {
 
   if(!denormalizedData){
     denormalizedData = denormalize(normalizedMensajesChat.result, schemaMensaje, normalizedMensajesChat.entities);
-    mensajesChat = `<strong style="color: blue">${denormalizedData.author.email}</strong> - [<h15 style="color: brown"> ${denormalizedData.fecha}</h15>]: <h15 style="color: green; font-family: italic"> ${denormalizedData.mensaje}</h15> <img width="70px" src=${denormalizedData.author.avatar} alt="Avatar"`
+    mensajesChat = `<strong style="color: blue">${denormalizedData.author.email}</strong> - [<h15 style="color: brown"> ${denormalizedData.fecha}</h15>]: <h15 style="color: green; font-family: italic"> ${denormalizedData.text}</h15> <img width="70px" src=${denormalizedData.author.avatar} alt="Avatar"`
   } else {
     for(let j=0; j<denormalizedData.posts.length; j++ ){
      mensajesChat = mensajesChat + `<strong style="color: blue">${denormalizedData.posts[j].author.email}</strong> - [<h15 style="color: brown"> ${denormalizedData.posts[j].fecha}</h15>]: <h15 style="color: green; font-family: italic"> ${denormalizedData.posts[j].text}</h15> <img width="70px" src=${denormalizedData.posts[j].author.avatar} alt="Avatar"</br></br></td></tr>`
@@ -89,11 +91,11 @@ botonchat.onclick = (e) => {
   const edad = document.getElementById('edad').value
   const alias = document.getElementById('alias').value
   const avatar = document.getElementById('avatar').value
-  const text = document.getElementById('mensaje').value
+  const text = document.getElementById('text').value
 
 
-  id1 = Math.floor(Math.random() * 99999)
-  id2 = Math.floor(Math.random() * 99999)
+  const id1 = Math.floor(Math.random() * 99999)
+  const id2 = Math.floor(Math.random() * 99999)
 
   const mensajesChat = {
     id:id1,

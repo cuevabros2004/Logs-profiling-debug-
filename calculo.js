@@ -29,16 +29,16 @@ export const  numerosRandom = (cant) => {
 
 }
 
-process.on('message', msg => {
+// process.on('message', msg => {
     
-    const resultado = numerosRandom(msg)
+//     const resultado = numerosRandom(msg)
     
-    process.send(resultado)
+//     process.send(resultado)
  
   
-})
+// })
 
-process.send('listo')
+// process.send('listo')
 
 
 

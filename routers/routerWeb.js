@@ -1,4 +1,5 @@
 import compression from 'compression'
+import loggerMiddleware from '../pino.js'
 
 import { Router } from 'express';
 import { controladorWeb } from "../controllers/controladorWeb.js";
@@ -9,12 +10,12 @@ import { controladorWebInfoProcess } from "../controllers/controladorProcessInfo
 
 const routerWeb = Router();
 
-routerWeb.get('/formulario', controladorWeb);
-routerWeb.get('/productos', controladorWebListadoProductos);
-routerWeb.post('/productos', controladorPostWebProductos);
-routerWeb.get('/info', controladorProcessInfo)
-routerWeb.get('/infoConCompresion', compression(), controladorProcessInfo)
-routerWeb.get('/infoList', controladorWebInfoProcess)
+routerWeb.get('/formulario', loggerMiddleware, controladorWeb);
+routerWeb.get('/productos', loggerMiddleware, controladorWebListadoProductos);
+routerWeb.post('/productos', loggerMiddleware, controladorPostWebProductos);
+routerWeb.get('/info', loggerMiddleware, controladorProcessInfo)
+routerWeb.get('/infoConCompresion', loggerMiddleware, compression(), controladorProcessInfo)
+routerWeb.get('/infoList', loggerMiddleware, controladorWebInfoProcess)
 
  
 export default  routerWeb;

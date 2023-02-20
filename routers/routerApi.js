@@ -1,11 +1,10 @@
 import { Router } from 'express';
+import loggerMiddleware from '../pino.js'
+
 const routerApi = Router();
 
 import {controladorGetProductos, 
         controladorPostProductos, 
-        controladorPutProductosSegunId, 
-        controladorGetProductosSegunId, 
-        controladorDeleteProductosSegunId,
         controladorproductosRandom,
         controladorGetProductosTest } 
 from "../controllers/controladorProductos.js";
@@ -14,13 +13,10 @@ from "../controllers/controladorProductos.js";
 
 import { controladorPostChat } from "../controllers/controladorChat.js";
 
-routerApi.post('/', controladorPostProductos);
-routerApi.get('/', controladorGetProductos);
-routerApi.get('/productos-test', controladorGetProductosTest);
-routerApi.get('/:id', controladorGetProductosSegunId);
-routerApi.put('/:id', controladorPutProductosSegunId);
-routerApi.delete('/:id', controladorDeleteProductosSegunId);
-routerApi.get('/random/productosRandom', controladorproductosRandom);
-routerApi.post('/chat', controladorPostChat)
+routerApi.post('/', loggerMiddleware, controladorPostProductos);
+routerApi.get('/',  loggerMiddleware, controladorGetProductos);
+routerApi.get('/productos-test', loggerMiddleware, controladorGetProductosTest);
+routerApi.get('/random/productosRandom', loggerMiddleware, controladorproductosRandom);
+routerApi.post('/chat',  loggerMiddleware, controladorPostChat)
 
 export   {routerApi };
